@@ -1,31 +1,18 @@
 import React from 'react'
 import SendIcon from '@material-ui/icons/Send';
 import styled from 'styled-components';
-import { useParams } from 'react-router';
-import firebase from "firebase"
 import { useForm } from "react-hook-form";
-import { useSelector } from 'react-redux';
-import db from "../../firebase"
+import { useDispatch } from 'react-redux';
+import { postTodoUser } from '../../App/TodoReducer/todoReducer';
 
 
 
 function ChatInput() {
-    const { user } = useSelector(state => state.channel)
-    let { id } = useParams();
+const dispatch = useDispatch()
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = (data) => {
-        if (data) {
-            const state = data.add
-            db.collection("slack-app")
-                .doc(id)
-                .collection("data")
-                .add({
-                    img: user.img,
-                    data: state,
-                    name: user.name,
-                    day: firebase.firestore.Timestamp.now(),
-                })
-                 }
+ const valueForm = data.value
+                    dispatch(postTodoUser(valueForm))
                  reset({})
                 }
 
@@ -34,8 +21,8 @@ function ChatInput() {
         <Container>
             <Input>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <input {...register("add", { required: true })}
-                        type="text" placeholder="Message here..." name="add" />
+                    <input {...register("value", { required: true })}
+                        type="text" placeholder="Message here..." name="value" />
                     <SentButton> <Sent /></SentButton>
                 </form>
             </Input>

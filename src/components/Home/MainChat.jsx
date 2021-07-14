@@ -1,18 +1,21 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from "styled-components"
-function MainChat({message}) {
+function MainChat() {
 
+    const user1 = useSelector(state=> state.listUser.listUser)
+  console.log(user1);
     return (
         <Container>
 
-                {message && message.map((items,index)=> {
+                {user1 && user1.map((items,index)=> {
                     return (
                         <ChatItem key = {index}>
-                        <AvatarUser><img src={items.img} alt="avatar" /></AvatarUser>
+                        <AvatarUser><img src="https://picsum.photos/200" alt="avatar" /></AvatarUser>
                         <Detail>
                              <NameUser>
-                                 <Name>{items.name}</Name>
-                                 <Time>{new Date(items.day).toUTCString()}</Time>
+                                 <Name>{items.title}</Name>
+                                 
                              </NameUser>
                              <Content>
                                    {items.data}
@@ -62,13 +65,6 @@ grid-template-columns: 50px auto;
  font-weight: 900;
  padding-right: 10px;
  cursor: pointer;
- `
- const Time = styled.div`
- font-weight: 300;
- font-size: 13px;
-  @media screen and (max-width:880px) {
-      display: none;
-  }
  `
  const Content = styled.div`
 padding-top: 5px;

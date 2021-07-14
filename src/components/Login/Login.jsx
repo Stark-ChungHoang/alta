@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import firebase from "firebase"
-import {auth,provider} from "../../firebase"
+import {provider} from "../../firebase"
 import styled from "styled-components"
+import { getTodoUser } from '../../App/TodoReducer/todoReducer'
 function Login({SetUser}) {
-
+useEffect(()=> { 
+    getTodoUser()
+},[])
     const Signin = ()=> {
         firebase.auth().signInWithPopup(provider)
         .then((result)=> {
@@ -25,8 +28,8 @@ function Login({SetUser}) {
     return (
         <Container>
             <Main>
-                <MainImg src="https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png" />
-                <h1>Sign in Slack</h1>
+                <MainImg src="../../alta.png" />
+                <h1>Welcome to Alta Media </h1>
                 <MainButton onClick = {()=> Signin()}>
                         Sign in with Google
                 </MainButton>

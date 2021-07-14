@@ -19,34 +19,34 @@ const getChannel = ()=> {
     })
 }
 
-const [message,setMessage] = useState([])
-const getMessage = ()=> {
-    db
-    .collection("slack-app")
-    .doc(id)
-    .collection("data")
-    .orderBy("data", "asc") 
-    .onSnapshot((snap)=> {
-       let abc = snap.docs.map((doc) => doc.data());
-       setMessage(abc)
-    })
-}
-useEffect(()=> {
-    getChannel()
-    getMessage()
-},[id] )
-console.log(message);
+// const [message,setMessage] = useState([])
+// const getMessage = ()=> {
+//     db
+//     .collection("slack-app")
+//     .doc(id)
+//     .collection("data")
+//     .orderBy("day", "asc")
+//     .onSnapshot((snap)=> {
+//        let abc = snap.docs.map((doc) => doc.data());
+//        setMessage(abc)
+//     })
+// }
+// useEffect(()=> {
+//     getChannel()
+//     getMessage()
+// },[id] )
+// console.log(message);
     return (
         <Container>
             <ChatHeader>
                     <HeaderTitle>
                         <Name>
                             <NameChannel>
-                                # { state && state.name}
+                                # TodoComment
                                 </NameChannel>
                             <Icon><StarOutlineIcon /></Icon>
                         </Name>
-                        <NameDetail>Company-wide anouncements and work-based matters</NameDetail>
+                        <NameDetail>Alta company conversation</NameDetail>
                     </HeaderTitle>
                     <HeaderDetail>
                         Details 
@@ -54,7 +54,7 @@ console.log(message);
                     </HeaderDetail>
             </ChatHeader>
             
-            <MainChat message = {message} />
+            <MainChat />
             
               <ChatInput />
         </Container>
@@ -65,7 +65,6 @@ export default Home
 const Container = styled.div`
 display:grid;
 grid-template-rows:55px auto min-content;
-min-height: 0;
 `
 
 const ChatHeader = styled.div`
@@ -108,6 +107,4 @@ cursor: pointer;
 const DetailIcon = styled.div`
 padding-left:3px;
 `
-const HomeChat = styled.div`
 
-`
